@@ -19,6 +19,8 @@
 ******************************************************************************/
 
 #include "clock_app.h"
+#include "main.h"
+#include "stm32f3xx_hal.h"
 
 /******************************************************************************
 * PRIVATE VARIABLES
@@ -41,6 +43,8 @@ static void AppClock(void *p_arg)
     uint8_t   second;
     uint8_t   minute;
     uint32_t  hour;
+
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 
     /* For flexible usage (not needed, but nice to show), we use the argument
      * as reference to the CANopen node object. If no node is given, we ignore

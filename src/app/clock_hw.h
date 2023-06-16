@@ -24,8 +24,7 @@ extern "C" {
 /******************************************************************************
 * INCLUDES
 ******************************************************************************/
-
-#include "stm32f4xx_hal.h"              /* for connecting interrupts         */
+#include "stm32f3xx_hal.h"              /* for connecting interrupts         */
 
                                         /* select application drivers:       */
 #include "drv_can_can1.h"               /* CAN driver (CAN1)                 */

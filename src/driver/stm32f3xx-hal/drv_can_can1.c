@@ -19,7 +19,7 @@
 ******************************************************************************/
 
 #include "drv_can_can1.h"
-#include "stm32f4xx_hal.h"
+#include "stm32f3xx_hal.h"
 
 /******************************************************************************
 * PRIVATE TYPE DEFINITION
@@ -52,16 +52,12 @@ typedef struct PIN_ASSIGN_T {
 ******************************************************************************/
 
 static PIN_ASSIGN Can1Pin_Rx[] = {
-    { GPIOA, GPIO_PIN_11, GPIO_AF9_CAN1 },  /* #0: PA11 */
-    { GPIOB, GPIO_PIN_8,  GPIO_AF9_CAN1 },  /* #1: PB8  */
-    { GPIOD, GPIO_PIN_0,  GPIO_AF9_CAN1 },  /* #3: PD0  */
-    { GPIOH, GPIO_PIN_14, GPIO_AF9_CAN1 },  /* #4: PH14 */
+    { GPIOA, GPIO_PIN_11, GPIO_AF9_CAN },  /* #0: PA11 */
+    { GPIOB, GPIO_PIN_8,  GPIO_AF9_CAN },  /* #1: PB8  */
 };
 static PIN_ASSIGN Can1Pin_Tx[] = {
-    { GPIOA, GPIO_PIN_12, GPIO_AF9_CAN1 },  /* #0: PA12 */
-    { GPIOB, GPIO_PIN_9,  GPIO_AF9_CAN1 },  /* #1: PB9  */
-    { GPIOD, GPIO_PIN_1,  GPIO_AF9_CAN1 },  /* #2: PD1  */
-    { GPIOH, GPIO_PIN_13, GPIO_AF9_CAN1 }   /* #3: PH13 */
+    { GPIOA, GPIO_PIN_12, GPIO_AF9_CAN },  /* #0: PA12 */
+    { GPIOB, GPIO_PIN_9,  GPIO_AF9_CAN },  /* #1: PB9  */
 };
 
 static BAUDRATE_TBL BaudrateTbl[] = {
@@ -93,7 +89,7 @@ static void    DrvCanClose  (void);
 * PUBLIC VARIABLE
 ******************************************************************************/
 
-const CO_IF_CAN_DRV STM32F4xx_CAN1_CanDriver = {
+const CO_IF_CAN_DRV STM32F3xx_CAN1_CanDriver = {
     DrvCanInit,
     DrvCanEnable,
     DrvCanRead,
@@ -107,7 +103,7 @@ const CO_IF_CAN_DRV STM32F4xx_CAN1_CanDriver = {
 ******************************************************************************/
 
 /* ST HAL CAN Receive Interrupt Handler */
-void CAN1_RX0_IRQHandler(void)
+void USB_LP_CAN_RX0_IRQHandler(void)
 {
     HAL_CAN_IRQHandler(&DrvCan1);
 }
@@ -130,7 +126,7 @@ static void DrvCanInit(void)
     /* setup CAN RX and TX pins */
     gpio.Mode      = GPIO_MODE_AF_PP;
     gpio.Pull      = GPIO_NOPULL;
-    gpio.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+    gpio.Speed     = GPIO_SPEED_FREQ_HIGH;
     gpio.Alternate = Can1Pin_Rx[CAN1_PIN_RX_SEL].Alternate;
     gpio.Pin       = Can1Pin_Rx[CAN1_PIN_RX_SEL].Pin;
     HAL_GPIO_Init(Can1Pin_Rx[CAN1_PIN_RX_SEL].Port, &gpio);
@@ -139,8 +135,8 @@ static void DrvCanInit(void)
     HAL_GPIO_Init(Can1Pin_Tx[CAN1_PIN_TX_SEL].Port, &gpio);
 
     /* CAN interrupt init */
-    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+    HAL_NVIC_SetPriority(CAN_RX0_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CAN_RX0_IRQn);
 }
 
 static void DrvCanEnable(uint32_t baudrate)
@@ -159,7 +155,7 @@ static void DrvCanEnable(uint32_t baudrate)
     }
 
     /* can controller mode */
-    DrvCan1.Instance  = CAN1;
+    DrvCan1.Instance  = CAN;
     DrvCan1.Init.Mode = CAN_MODE_NORMAL;
 
     /* baudrate settings */

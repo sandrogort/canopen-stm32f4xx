@@ -31,13 +31,13 @@ CPMAddPackage(
 # - to get a smaller package size
 # - eliminate compilation errors with -Wpedantic
 #
-set(HAL_TARGET   "stm32f4xx-hal")
-set(HAL_PROJECT  "embedded-office/STM32CubeF4")
-set(HAL_VERSION  "1.27.1-p2")
+set(HAL_TARGET   "stm32f3xx-hal")
+set(HAL_PROJECT  "embedded-office/STM32CubeF3")
+set(HAL_VERSION  "1.11.3-p1")
 #
 # configure component build for:
 #
-set(HAL_DEVICE   "STM32F446xx")
+set(HAL_DEVICE   "STM32F303xE")
 set(HAL_CONFIG   "${CMAKE_SOURCE_DIR}/src/config")
 CPMAddPackage(
   NAME    ${HAL_TARGET}

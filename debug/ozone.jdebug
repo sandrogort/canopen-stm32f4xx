@@ -23,7 +23,7 @@ void OnProjectLoad (void) {
   // Dialog-generated settings
   //
   Project.AddPathSubstitute ("../", "$(ProjectDir)");
-  Project.SetDevice ("STM32F446ZE");
+  Project.SetDevice ("STM32F303RE");
   Project.SetHostIF ("USB", "");
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
@@ -31,7 +31,7 @@ void OnProjectLoad (void) {
   //
   // User settings
   //
-  File.Open ("../out/debug/canopen-stm32f4xx.elf");
+  File.Open ("../out/debug/canopen-stm32f3xx.elf");
 }
 
 /*********************************************************************

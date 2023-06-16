@@ -20,6 +20,7 @@
 
 #include "clock_hw.h"
 #include "clock_app.h"
+#include "drv_nvm_dummy.h"
 
 /******************************************************************************
 * PUBLIC VARIABLES
@@ -29,9 +30,9 @@
  * selections, see the directory /drivers.
  */
 struct CO_IF_DRV_T AppDriver = {
-    &STM32F4xx_CAN1_CanDriver,
-    &STM32F4xx_TIM2_TimerDriver,
-    &STM32F4xx_FMPI2C1_AT24C256_NvmDriver
+    &STM32F3xx_CAN1_CanDriver,
+    &STM32F3xx_TIM2_TimerDriver,
+    &DummyNvmDriver
 };
 
 /******************************************************************************
@@ -42,7 +43,7 @@ struct CO_IF_DRV_T AppDriver = {
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
     /* process CAN frame with CANopen protocol */
-    if (hcan->Instance == CAN1) {
+    if (hcan->Instance == CAN) {
         CONodeProcess(&Clk);
     };
 }

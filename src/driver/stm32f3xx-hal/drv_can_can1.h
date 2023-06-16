@@ -31,7 +31,7 @@ extern "C" {
 * PUBLIC SYMBOLS
 ******************************************************************************/
 
-extern const CO_IF_CAN_DRV STM32F4xx_CAN1_CanDriver;
+extern const CO_IF_CAN_DRV STM32F3xx_CAN1_CanDriver;
 
 #ifdef __cplusplus               /* for compatibility with C++ environments  */
 }

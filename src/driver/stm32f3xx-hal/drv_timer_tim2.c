@@ -19,7 +19,7 @@
 ******************************************************************************/
 
 #include "drv_timer_tim2.h"
-#include "stm32f4xx_hal.h"
+#include "stm32f3xx_hal.h"
 
 /******************************************************************************
 * PRIVATE VARIABLES
@@ -42,7 +42,7 @@ static void     DrvTimerStop   (void);
 * PUBLIC VARIABLE
 ******************************************************************************/
 
-const CO_IF_TIMER_DRV STM32F4xx_TIM2_TimerDriver = {
+const CO_IF_TIMER_DRV STM32F3xx_TIM2_TimerDriver = {
     DrvTimerInit,
     DrvTimerReload,
     DrvTimerDelay,
