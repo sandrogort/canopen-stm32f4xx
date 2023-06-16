@@ -61,14 +61,14 @@ static PIN_ASSIGN Can1Pin_Tx[] = {
 };
 
 static BAUDRATE_TBL BaudrateTbl[] = {
-    {   10000, 250, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
-    {   20000, 125, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
-    {   50000,  60, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
-    {  125000,  20, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
-    {  250000,  10, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
-    {  500000,   5, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
-    {  800000,   3, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_3TQ },  /* SP: 84,2%, ERR: -1,32% */
-    { 1000000,   3, CAN_SJW_1TQ, CAN_BS1_12TQ, CAN_BS2_2TQ },  /* SP: 86,7%, ERR:     0% */
+    {   10000, 200, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
+    {   20000, 100, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
+    {   50000,  40, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
+    {  125000,  16, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
+    {  250000,   8, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
+    {  500000,   4, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 88,9%, ERR:     0% */
+    {  800000,   3, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_3TQ },  /* SP: 84,2%, ERR:     0% */
+    { 1000000,   2, CAN_SJW_1TQ, CAN_BS1_15TQ, CAN_BS2_2TQ },  /* SP: 86,7%, ERR:     0% */
     { 0, 0, 0, 0, 0 }
 };
 
@@ -135,8 +135,8 @@ static void DrvCanInit(void)
     HAL_GPIO_Init(Can1Pin_Tx[CAN1_PIN_TX_SEL].Port, &gpio);
 
     /* CAN interrupt init */
-    HAL_NVIC_SetPriority(CAN_RX0_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(CAN_RX0_IRQn);
+    HAL_NVIC_SetPriority(USB_LP_CAN_RX0_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USB_LP_CAN_RX0_IRQn);
 }
 
 static void DrvCanEnable(uint32_t baudrate)
