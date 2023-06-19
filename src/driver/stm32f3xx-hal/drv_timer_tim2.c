@@ -68,8 +68,8 @@ void TIM2_IRQHandler(void)
 static void DrvTimerInit(uint32_t freq)
 {
     /* For simplicity, we implement a fixed frequency of 1MHz:
-       - the input frequency TIM2_CLK (APB1) is: 90 MHz
-       - with a prescaler of: 90, we get a counting frequency of: 1MHz
+       - the input frequency TIM2_CLK (APB1) is: 72 MHz
+       - with a prescaler of: 72, we get a counting frequency of: 1MHz
        - in other words we get a tick every: dt = 1us
        - with the timer width 32bit we get: max. time = 4294s (1h 11min 34s)
      */
@@ -88,7 +88,7 @@ static void DrvTimerInit(uint32_t freq)
      * (note: the timer reloads to 0 on this overflow)
      */
     DrvTimer2.Instance = TIM2;
-    DrvTimer2.Init.Prescaler = 90;
+    DrvTimer2.Init.Prescaler = 72;
     DrvTimer2.Init.CounterMode = TIM_COUNTERMODE_UP;
     DrvTimer2.Init.Period = 4294967295;
     DrvTimer2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
